@@ -26,9 +26,10 @@ const Login = () => {
             const response = await axios.post('https://hcmpblog-server-7cdb5790849d.herokuapp.com/login', {
                 email,
                 password
-            },
-            { withCredentials: true }
+            }
         )
+
+        localStorage.setItem("hcmp_token", response.data.token)
 
             toast.success('Success')
             //---Re-Route to blog generator--//

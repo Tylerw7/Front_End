@@ -11,13 +11,17 @@ const BlogGenerator = () => {
 
     useEffect(() => {
         const checkAuth = async () => {
+          const token = localStorage.getItem('hcmp_token')
           try {
             // Call API without setting Authorization header; cookie is sent automatically
             const response = await axios.post(
               "https://hcmpblog-server-7cdb5790849d.herokuapp.com/auth",
               {},
-              { withCredentials: true }
+              {headers: {
+                Authorization: `Bearer ${token}`
+              }}
             );
+            console.log(response)
             setIsAuthenticated(true);
           } catch (error) {
             console.error(error);
